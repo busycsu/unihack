@@ -12,10 +12,11 @@ const Launch = () =>{
         }else{
             alert('Incorrect password or email')
         }
+        console.log(accessToken)
     }
     return (
         <div className="home">
-            {localStorage.getItem('access_token') ==""? <SigninOrUp getToken={getTokens}/> : <Home token={localStorage.getItem('access_token')}/>}
+            {accessToken === ""? <SigninOrUp getToken={getTokens}/> : <Home token={accessToken}/>}
         </div>
     )
 }
