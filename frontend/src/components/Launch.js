@@ -6,17 +6,19 @@ const Launch = () =>{
     const[accessToken, setAccessToken] = useState("")
     const getTokens = async (tokens) => {
         if(tokens["access"] !== undefined){
-            setRefreshToken(tokens.refresh)
+            localStorage.setItem('access_token', tokens.access)
             setAccessToken(tokens.access)
-            localStorage.setItem('access_token', tokens.access);
+            // setRefreshToken(tokens.refresh)
         }else{
             alert('Incorrect password or email')
         }
-        console.log(accessToken)
+        
     }
+    console.log(accessToken)
     return (
         <div className="home">
-            {accessToken === ""? <SigninOrUp getToken={getTokens}/> : <Home token={accessToken}/>}
+            {(localStorage.getItem('access_token') === null)? 
+            <SigninOrUp getToken={getTokens}/> : <Home token={localStorage.getItem('access_token')}/>}
         </div>
     )
 }
